@@ -1,5 +1,6 @@
-package `in`.yesandroid.sampleapp
+package `in`.yesandroid.sampleapp.adapter
 
+import `in`.yesandroid.sampleapp.R
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater

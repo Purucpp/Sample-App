@@ -1,4 +1,4 @@
-package com.yesandroid.kfirst
+package `in`.yesandroid.sampleapp.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

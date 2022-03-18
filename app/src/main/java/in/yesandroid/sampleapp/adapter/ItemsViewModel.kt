@@ -1,4 +1,4 @@
-package `in`.yesandroid.sampleapp
+package `in`.yesandroid.sampleapp.adapter
 
 data class ItemsViewModel(val image: Int, val text: String, val url:String, var isSelected: Boolean) {
 

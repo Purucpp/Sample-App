@@ -1,5 +1,6 @@
-package `in`.yesandroid.sampleapp
+package `in`.yesandroid.sampleapp.api
 
+import `in`.yesandroid.sampleapp.api.Api_Response
 import retrofit2.Call
 import retrofit2.http.GET
 

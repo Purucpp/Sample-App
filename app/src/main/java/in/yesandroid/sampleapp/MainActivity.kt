@@ -1,15 +1,18 @@
 package `in`.yesandroid.sampleapp
 
+import `in`.yesandroid.sampleapp.adapter.CustomAdapter
+import `in`.yesandroid.sampleapp.adapter.ItemsViewModel
+import `in`.yesandroid.sampleapp.api.Api_Response
+import `in`.yesandroid.sampleapp.api.Get_Interface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-import com.yesandroid.kfirst.Get_Retrofit_Client
+import `in`.yesandroid.sampleapp.api.Get_Retrofit_Client
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
