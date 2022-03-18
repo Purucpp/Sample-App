@@ -1,4 +1,4 @@
-package `in`.janitri.sampleapp
+package `in`.yesandroid.sampleapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package `in`.janitri.sampleapp
+package `in`.yesandroid.sampleapp
 
 import com.google.gson.annotations.Expose
 

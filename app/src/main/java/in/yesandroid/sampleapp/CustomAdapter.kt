@@ -1,14 +1,12 @@
-package `in`.janitri.sampleapp
+package `in`.yesandroid.sampleapp
 
 import android.graphics.Color
-import android.icu.number.NumberFormatter.with
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
@@ -33,16 +31,16 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
-        if(isPresent.contains(position))
+     /*(   if(isPresent.contains(position))
         {
             holder.itemView.setBackgroundColor(Color.CYAN)
         }
         else{
             holder.itemView.setBackgroundColor(Color.WHITE)
-        }
+        }  */
 
         val ItemsViewModel = mList[position]
-      //  holder.itemView.setBackgroundColor(if (ItemsViewModel.isSelected) Color.CYAN else Color.WHITE)
+        holder.itemView.setBackgroundColor(if (ItemsViewModel.isSelected) Color.CYAN else Color.WHITE)
 
 
         // sets the image to the imageview from our itemHolder class
@@ -53,6 +51,11 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
 
         holder?.textView?.setOnClickListener {
             Log.d("Tk->",ItemsViewModel.text)
+
+            ItemsViewModel.setSelected(!ItemsViewModel.isSelected)
+
+            holder.itemView.setBackgroundColor(if (ItemsViewModel.isSelected) Color.CYAN else Color.WHITE)
+
         }
 
         holder?.itemView?.setOnClickListener{
@@ -61,17 +64,22 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
             Log.d("item-",isPresent.toString())
 
 
-            if(isPresent.contains(position))
-            {
-                isPresent.remove(position)
-                holder.itemView.setBackgroundColor(Color.CYAN)
-            }
-            else{
-                isPresent.add(position)
-                holder.itemView.setBackgroundColor(Color.WHITE)
-            }
+            ItemsViewModel.setSelected(!ItemsViewModel.isSelected)
 
-            Log.d("item-",isPresent.toString())
+            holder.itemView.setBackgroundColor(if (ItemsViewModel.isSelected) Color.CYAN else Color.WHITE)
+
+
+            /*  if(isPresent.contains(position))
+              {
+                  isPresent.remove(position)
+                  holder.itemView.setBackgroundColor(Color.CYAN)
+              }
+              else{
+                  isPresent.add(position)
+                  holder.itemView.setBackgroundColor(Color.WHITE)
+              }
+
+              Log.d("item-",isPresent.toString()) */
         }
 
 
