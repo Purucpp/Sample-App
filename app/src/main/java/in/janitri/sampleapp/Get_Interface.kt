@@ -1,4 +1,4 @@
-package com.yesandroid.kfirst
+package `in`.janitri.sampleapp
 
 import com.google.gson.JsonArray
 import retrofit2.Call
@@ -8,4 +8,5 @@ interface Get_Interface {
 
     @GET("social/a.json")
     fun getsocial(): Call<List<Api_Response>>?
+
 }
