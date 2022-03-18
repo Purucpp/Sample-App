@@ -13,6 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import `in`.yesandroid.sampleapp.api.Get_Retrofit_Client
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
+import android.view.Window
+import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,12 +45,16 @@ class MainActivity : AppCompatActivity() {
 
         // This loop will create 20 Views containing
         // the image with the count of view
-        for (i in 1..20) {
-           // data.add(ItemsViewModel(R.drawable.ic_launcher_background, "Item " + i))
-        }
+
 
         // This will pass the ArrayList to our Adapter
 
+
+        if (!checkForInternet(this)) {
+
+            showDialog("No Internet")
+
+        }
 
 
 
@@ -132,6 +144,78 @@ class MainActivity : AppCompatActivity() {
 
 
         //update recyclerview
+
+    }
+
+
+
+
+    private fun checkForInternet(context: Context): Boolean {
+
+        // register activity with the connectivity manager service
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        // if the android version is equal to M
+        // or greater we need to use the
+        // NetworkCapabilities to check what type of
+        // network has the internet connection
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            // Returns a Network object corresponding to
+            // the currently active default data network.
+            val network = connectivityManager.activeNetwork ?: return false
+
+            // Representation of the capabilities of an active network.
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                // Indicates this network uses a Wi-Fi transport,
+                // or WiFi has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+                // Indicates this network uses a Cellular transport. or
+                // Cellular has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+                // else return false
+                else -> false
+            }
+        } else {
+            // if the android version is below M
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
+    }
+
+
+
+    private fun showDialog(title: String) {
+        val builder = AlertDialog.Builder(this)
+        //set title for alert dialog
+        builder.setTitle(title)
+        //set message for alert dialog
+        builder.setMessage("Please check network connection and Restart the app.")
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+        //performing positive action
+     /*   builder.setPositiveButton("Yes"){dialogInterface, which ->
+            Toast.makeText(applicationContext,"clicked yes",Toast.LENGTH_LONG).show()
+        }
+        //performing cancel action
+        builder.setNeutralButton("Cancel"){dialogInterface , which ->
+            Toast.makeText(applicationContext,"clicked cancel\n operation cancel",Toast.LENGTH_LONG).show()
+        } */
+        //performing negative action
+        builder.setNegativeButton("OK"){dialogInterface, which ->
+          //  Toast.makeText(applicationContext,"clicked No",Toast.LENGTH_LONG).show()
+        }
+        // Create the AlertDialog
+        val alertDialog: AlertDialog = builder.create()
+        // Set other dialog properties
+        alertDialog.setCancelable(false)
+        alertDialog.show()
 
     }
 
