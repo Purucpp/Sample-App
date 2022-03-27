@@ -1,11 +1,11 @@
-package com.yesandroid.tree.RecyvlerView
+package `in`.yesandroid.tree.RecyvlerView
 
+import `in`.yesandroid.sampleapp.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.yesandroid.tree.R
 
 class ThirdAdapter(val iddd: List<String>, val age:List<String>,val itime:List<String>) :
     RecyclerView.Adapter<ThirdAdapter.FlowerViewHolder>() {

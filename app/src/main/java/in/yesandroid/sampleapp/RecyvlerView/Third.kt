@@ -1,5 +1,11 @@
 package `in`.yesandroid.sampleapp.RecyvlerView
 
+import `in`.yesandroid.sampleapp.MainActivity
+import `in`.yesandroid.sampleapp.R
+import `in`.yesandroid.sampleapp.Tree
+import `in`.yesandroid.sampleapp.TreeViewModel
+import `in`.yesandroid.tree.RecyvlerView.ThirdAdapter
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +17,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import in.yesandroid.sampleapp.TreeViewModel
-import in.yesandroid.sampleapp.MainActivity
-import in.yesandroid.sampleapp.R
-import in.yesandroid.sampleapp.Tree
-import in.yesandroid.sampleapp.TreeViewModel
+
+
 import java.lang.Integer.parseInt
 import java.text.DateFormat
 import java.util.*

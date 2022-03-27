@@ -1,4 +1,4 @@
-package com.yesandroid.tree
+package `in`.yesandroid.sampleapp
 
 
 import android.app.Application

@@ -1,14 +1,15 @@
-package com.yesandroid.sampleapp
+package `in`.yesandroid.sampleapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import `in`.yesandroid.sampleapp.RecyvlerView.Third
+
 import kotlin.toString as kotlinToString
 
 class MainActivity : AppCompatActivity() {
