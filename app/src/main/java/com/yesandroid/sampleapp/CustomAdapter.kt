@@ -1,4 +1,4 @@
-package `in`.yesandroid.sampleapp
+package com.yesandroid.sampleapp
 
 import android.graphics.Color
 import android.util.Log

@@ -1,4 +1,4 @@
-package `in`.yesandroid.sampleapp
+package com.yesandroid.sampleapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
