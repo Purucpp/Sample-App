@@ -1,73 +1,78 @@
+/*
+ * Copyright (C) 2017 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.yesandroid.sampleapp
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-import com.yesandroid.kfirst.Get_Retrofit_Client
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
+
+    private val newWordActivityRequestCode = 1
+    private val wordViewModel: WordViewModel by viewModels {
+        WordViewModelFactory((application as WordsApplication).repository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        val adapter = WordListAdapter()
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-
-
-        val recyclerview = findViewById<RecyclerView>(R.id.recyclerview)
-
-        // this creates a vertical layout Manager
-        recyclerview.layoutManager = LinearLayoutManager(this)
-
-        // ArrayList of class ItemsViewModel
-        val data = ArrayList<ItemsViewModel>()
-
-        // This loop will create 20 Views containing
-        // the image with the count of view
-        for (i in 1..20) {
-           // data.add(ItemsViewModel(R.drawable.ic_launcher_background, "Item " + i))
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener {
+            val intent = Intent(this@MainActivity, NewWordActivity::class.java)
+            startActivityForResult(intent, newWordActivityRequestCode)
         }
 
-        // This will pass the ArrayList to our Adapter
 
+        // Add an observer on the LiveData returned by getAlphabetizedWords.
+        // The onChanged() method fires when the observed data changes and the activity is
+        // in the foreground.
+        wordViewModel.allWords.observe(owner = this) { words ->
+            // Update the cached copy of the words in the adapter.
+            words.let { adapter.submitList(it) }
+        }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intentData)
 
-
-        val client= Get_Retrofit_Client().getClient();
-        val service = client?.create(Get_Interface::class.java)
-        val call = service?.getsocial()
-
-        call?.enqueue(object : Callback<List<Api_Response>?>
-        {
-            override fun onResponse(call: Call<List<Api_Response>?>, response: Response<List<Api_Response>?>)
-            {
-                val items = response.body()
-                if (items != null) {
-                    for( i in 0 until items.count())
-                    {
-                        Log.d("name",items[i].getName().toString())
-                        Log.d("url",items[i].getImageUrl().toString());
-                        data.add(ItemsViewModel(R.drawable.ic_launcher_background, items[i].getName().toString(),items[i].getImageUrl().toString(),false))
-
-                    }
-
-                    val adapter = CustomAdapter(data)
-
-                    // Setting the Adapter with the recyclerview
-                    recyclerview.adapter = adapter
-
-                }
+        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
+            intentData?.getStringExtra(NewWordActivity.EXTRA_REPLY)?.let { reply ->
+                val word = Word(reply)
+                wordViewModel.insert(word)
             }
-            override fun onFailure(call: Call<List<Api_Response>?>, t: Throwable) {
-                Log.d("Failed------", t.message.toString());
-
-            }
-        })
-
+        } else {
+            Toast.makeText(
+                applicationContext,
+                R.string.empty_not_saved,
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 }
