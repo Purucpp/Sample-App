@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            app:srcCompat="@drawable/banner" />
+            app:srcCompat="@drawable/ic_launcher_background" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
