@@ -4,11 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../layout/custom_preview.xml" value="0.25277777777777777" />
-        <entry key="app/src/main/res/font/font.xml" value="0.21296296296296297" />
-        <entry key="app/src/main/res/font/roboto.xml" value="0.2898148148148148" />
-        <entry key="app/src/main/res/font/roboto_light.xml" value="0.2898148148148148" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.14361702127659576" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26721014492753625" />
+        <entry key="app/src/main/res/layout/activity_registration.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.14361702127659576" />
         <entry key="app/src/main/res/layout/card_view_design.xml" value="0.26721014492753625" />
+        <entry key="app/src/main/res/layout/fragment_enter_details.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/layout/fragment_terms_and_conditions.xml" value="0.14361702127659576" />
       </map>
     </option>
   </component>
