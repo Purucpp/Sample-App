@@ -10,9 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SampleApp">
+        android:theme="@style/AppTheme">
         <activity
-            android:name="com.yesandroid.sampleapp.MainActivity"
+            android:name="com.yesandroid.sampleapp.view.MainActivity"
             android:exported="true"
             android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
