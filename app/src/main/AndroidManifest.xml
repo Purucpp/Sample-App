@@ -5,22 +5,69 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SampleApp">
+        android:theme="@style/MultiWindowSampleTheme">
+        <!-- The launcher Activity that is started when the application is first started.
+         Note that we are setting the task affinity to "" to ensure each activity is launched
+         into a separate task stack. -->
         <activity
             android:name="com.yesandroid.sampleapp.MainActivity"
-            android:exported="true"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- This Activity cannot be resized and is always displayed full screen. -->
+        <activity
+            android:name="com.yesandroid.sampleapp.activities.UnresizableActivity"
+            android:resizeableActivity="false"
+            android:taskAffinity="" />
+
+        <!-- This Activity has a default size (750x500dp) with a minimum size
+        (500dp at its shortest side). It is launched in the top/end (top/right) corner by default.
+         These attributes are defined in the 'layout' tag within an Activity definition. -->
+        <activity
+            android:name="com.yesandroid.sampleapp.activities.MinimumSizeActivity"
+            android:launchMode="singleInstance"
+            android:taskAffinity="">
+            <layout
+                android:defaultHeight="500dp"
+                android:defaultWidth="750dp"
+                android:gravity="top|end"
+                android:minWidth="500dp"
+                android:minHeight="500dp" />
+        </activity>
+
+        <!-- In split-screen mode, this Activity is launched adjacent to another Activity. This is
+          controlled via a flag set in the intent that launches this Activity. -->
+        <activity
+            android:name="com.yesandroid.sampleapp.activities.AdjacentActivity"
+            android:taskAffinity="" />
+
+        <!-- This Activity is launched within an area defined in its launch intent. -->
+        <activity
+            android:name="com.yesandroid.sampleapp.activities.LaunchBoundsActivity"
+            android:taskAffinity="" />
+
+        <!-- This activity handles all configuration changes itself.
+        Callbacks for configuration changes are received in 'onConfigurationChanged'. -->
+        <activity
+            android:name="com.yesandroid.sampleapp.activities.CustomConfigurationChangeActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:launchMode="singleInstance"
+            android:taskAffinity="" />
+
+        <!-- This Activity is launched in a new task without any special flags or settings. -->
+        <activity
+            android:name="com.yesandroid.sampleapp.activities.BasicActivity"
+            android:launchMode="singleInstance"
+            android:taskAffinity="" />
+
     </application>
 
 </manifest>
